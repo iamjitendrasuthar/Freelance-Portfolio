@@ -139,7 +139,8 @@ const Navbar = () => {
       <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
-            variants={menuVariants}
+            // @ts-ignore
+            variants={menuVariants as any}
             initial="initial"
             animate="animate"
             exit="exit"
