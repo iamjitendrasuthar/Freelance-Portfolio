@@ -48,12 +48,12 @@ const FAQItem = ({ faq, isOpen, onClick }) => {
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{
-              height: "auto",
-              opacity: 1,
-              transition: {
-                height: { duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] },
-                opacity: { duration: 0.25, delay: 0.1 },
-              },
+              height: isOpen ? "auto" : 0,
+              opacity: isOpen ? 1 : 0,
+            }}
+            transition={{
+              duration: 0.3,
+              ease: "easeInOut",
             }}
             exit={{
               height: 0,
