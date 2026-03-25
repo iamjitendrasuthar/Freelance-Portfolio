@@ -47,21 +47,11 @@ const FAQItem = ({ faq, isOpen, onClick }) => {
         {isOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{
-              height: isOpen ? "auto" : 0,
-              opacity: isOpen ? 1 : 0,
-            }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
             transition={{
-              duration: 0.3,
-              ease: "easeInOut",
-            }}
-            exit={{
-              height: 0,
-              opacity: 0,
-              transition: {
-                height: { duration: 0.3 },
-                opacity: { duration: 0.2 },
-              },
+              duration: 0.4,
+              ease: [0.21, 0.45, 0.32, 0.9],
             }}
             className="overflow-hidden"
           >

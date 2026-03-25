@@ -65,18 +65,18 @@ const FAQSection = () => {
         </div>
 
         {/* FAQ Accordion List */}
-        <FadeIn delay={0.2}>
-          <div className="bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2rem] p-2 sm:p-4 relative">
-            {FAQS.map((faq, idx) => (
+        <div className="bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2rem] p-2 sm:p-4 relative">
+          {FAQS.map((faq, idx) => (
+            <FadeIn key={idx} delay={0.2}>
               <FAQItem
                 key={idx}
                 faq={faq}
                 isOpen={openIdx === idx}
-                onClick={() => setOpenIdx(idx === openIdx ? -1 : idx)}
+                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
               />
-            ))}
-          </div>
-        </FadeIn>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
   );
