@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link"; // Next.js Link import kiya gaya hai
-import { Diamond, Menu, X, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation"; // Pathname check karne ke liye
+import { Diamond, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import Button from "@/utils/Button"; // Ensure this path is correct
+import Button from "@/utils/Button";
 
-// 1. Array ko update karke Name aur Path dono define kiye
 const NAV_LINKS = [
   { name: "Home", path: "/" },
   { name: "Work", path: "/work" },
@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { name: "Services", path: "/services" },
 ];
 
+// --- Animations remains same ---
 const menuVariants = {
   initial: { opacity: 0, y: -15 },
   animate: {
@@ -47,15 +48,19 @@ const linkVariants = {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname(); // Current path track karega
 
-  // Handle Scroll Effect
+  // 1. Jab bhi pathname change ho (page change ho jaye), tab menu close karein
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -90,15 +95,23 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1 bg-white/5 border border-white/10 rounded-full px-2 py-1.5 backdrop-blur-md">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              href={link.path} // Yahan standard <a> ki jagah Next.js Link use kiya gaya hai
-              className="px-4 py-2 text-[16px] font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition-all"
-            >
-              {link.name}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.path;
+
+            return (
+              <Link
+                key={link.name}
+                href={link.path}
+                className={`px-4 py-2 text-[16px] font-medium rounded-full transition-all ${
+                  isActive
+                    ? "text-white bg-white/10"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Desktop CTA */}
@@ -115,47 +128,52 @@ const Navbar = () => {
 
         {/* Mobile Toggle Button */}
         <button
-          className="md:hidden relative z-50 p-2 -mr-2 text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5 focus:outline-none"
+          className="md:hidden relative z-50 p-2 text-gray-300"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Menu Dropdown */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
             variants={menuVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            className="absolute top-full left-0 right-0 bg-[#051814]/95 backdrop-blur-2xl shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.05)] md:hidden h-[100vh] overflow-y-auto pb-32"
+            className="absolute top-0 left-0 right-0 bg-[#051814] md:hidden h-screen z-40 pt-24"
           >
             <div className="px-4 py-6 flex flex-col gap-2">
-              {NAV_LINKS.map((link) => (
-                <motion.div variants={linkVariants} key={link.name}>
-                  {/* <Link> component inside framer-motion */}
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.path;
+
+                return (
                   <Link
+                    key={link.name}
                     href={link.path}
-                    className="flex items-center  justify-between p-4 text-lg font-medium text-gray-300 hover:text-emerald-400 hover:bg-white/5 rounded-2xl transition-all"
+                    className={`p-4 text-lg font-medium rounded-2xl transition-all ${
+                      isActive
+                        ? "text-emerald-400 bg-white/5"
+                        : "text-gray-300 hover:text-emerald-400"
+                    }`}
                   >
                     {link.name}
                   </Link>
-                </motion.div>
-              ))}
+                );
+              })}
 
-              <motion.div variants={linkVariants} className="mt-8 px-2">
+              <div className="mt-8 px-2">
                 <Link href="/contact">
                   <Button
                     variant="primary"
-                    className="w-full justify-center py-4 text-[18px] font-medium font-satoshi text-[#0A0A0A] cursor-pointer"
+                    className="w-full py-4 text-[#0A0A0A]"
                   >
                     Contact us
                   </Button>
                 </Link>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         )}

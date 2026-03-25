@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import DeveloperStandard from "@/components/DeveloperStandard";
 import TechExpertise from "@/components/TechExpertise";
@@ -11,7 +10,6 @@ import SuccessStories from "@/components/SuccessStories";
 import TechnicalCapabilities from "@/components/TechnicalCapabilities";
 import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -31,7 +29,6 @@ export default function Home() {
       `,
         }}
       />
-      <Navbar />
       <main>
         <Hero />
         <DeveloperStandard />
@@ -44,7 +41,6 @@ export default function Home() {
         <FAQSection />
         <CTASection />
       </main>
-      <Footer />
     </div>
   );
 }
