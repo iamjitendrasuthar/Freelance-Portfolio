@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation"; // Pathname check karne ke liye
 import { Diamond, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import Button from "@/utils/Button"; // Aapka button component
+import Button from "@/utils/Button";
 
 const NAV_LINKS = [
   { name: "Home", path: "/" },
@@ -14,15 +14,17 @@ const NAV_LINKS = [
   { name: "Services", path: "/services" },
 ];
 
-// Mobile GPU par smooth chalne ke liye optimized variants
+// --- Animations remains same ---
 const menuVariants = {
-  initial: { opacity: 0, y: -20 },
+  initial: { opacity: 0, y: -15 },
   animate: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.3,
-      ease: [0.22, 1, 0.36, 1],
+      ease: "easeOut",
+      staggerChildren: 0.05,
+      delayChildren: 0.1,
     },
   },
   exit: {
@@ -30,59 +32,53 @@ const menuVariants = {
     y: -15,
     transition: {
       duration: 0.2,
-      ease: "easeInOut",
+      ease: "easeIn",
+      staggerChildren: 0.05,
+      staggerDirection: -1,
     },
   },
+};
+
+const linkVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2 } },
+  exit: { opacity: 0, transition: { duration: 0.1 } },
 };
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
+  const pathname = usePathname(); // Current path track karega
 
-  // Route change hone par menu band karne ke liye
+  // 1. Jab bhi pathname change ho (page change ho jaye), tab menu close karein
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // Scroll handle karne ke liye (passive: true for mobile performance)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Layout thrashing rokne ke liye chhota delay
   useEffect(() => {
-    let timeoutId;
     if (isOpen) {
-      timeoutId = setTimeout(() => {
-        document.body.style.overflow = "hidden";
-      }, 50);
+      document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
-    return () => clearTimeout(timeoutId);
   }, [isOpen]);
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        // Padding sirf scroll ke base par change hogi, open hone par nahi
-        scrolled ? "py-4" : "py-6"
-      } ${
-        // Background color aur shadow logic
-        isOpen
-          ? "bg-[#051814]" // Jab menu open ho toh solid background (taaki blur ka lag na aaye)
-          : scrolled
-            ? "bg-[#051814]/80 backdrop-blur-xl shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.05),0_10px_20px_-10px_rgba(0,0,0,0.3)]"
-            : "bg-transparent shadow-none"
+        scrolled
+          ? "bg-[#051814]/80 backdrop-blur-xl py-4 shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.05),0_10px_20px_-10px_rgba(0,0,0,0.3)]"
+          : "bg-transparent py-6 shadow-none"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between relative">
-        {/* Logo */}
+        {/* Logo (Bonus: Isko bhi Link bana diya taaki click karne pe Home par jaye) */}
         <Link
           href="/"
           className="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl cursor-pointer z-50"
@@ -101,6 +97,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-1 bg-white/5 border border-white/10 rounded-full px-2 py-1.5 backdrop-blur-md">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.path;
+
             return (
               <Link
                 key={link.name}
@@ -131,9 +128,8 @@ const Navbar = () => {
 
         {/* Mobile Toggle Button */}
         <button
-          className="md:hidden relative z-50 p-2 text-gray-300 touch-manipulation"
+          className="md:hidden relative z-50 p-2 text-gray-300"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -143,11 +139,12 @@ const Navbar = () => {
       <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
-            variants={menuVariants}
+            // @ts-ignore
+            variants={menuVariants as any}
             initial="initial"
             animate="animate"
             exit="exit"
-            className="absolute top-0 left-0 right-0 bg-[#051814] md:hidden h-screen z-40 pt-24 will-change-transform"
+            className="absolute top-0 left-0 right-0 bg-[#051814] md:hidden h-screen z-40 pt-24"
           >
             <div className="px-4 py-6 flex flex-col gap-2">
               {NAV_LINKS.map((link) => {
@@ -157,7 +154,6 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     href={link.path}
-                    onClick={() => setIsOpen(false)} // Link click par menu close karna
                     className={`p-4 text-lg font-medium rounded-2xl transition-all ${
                       isActive
                         ? "text-emerald-400 bg-white/5"
@@ -170,7 +166,7 @@ const Navbar = () => {
               })}
 
               <div className="mt-8 px-2">
-                <Link href="/contact" onClick={() => setIsOpen(false)}>
+                <Link href="/contact">
                   <Button
                     variant="primary"
                     className="w-full py-4 text-[#0A0A0A]"
