@@ -13,22 +13,7 @@ import CTASection from "@/components/CTASection";
 
 export default function Home() {
   return (
-    <div className="font-sans text-white bg-[#0a0a0a] selection:bg-[#10B981]/30 overflow-x-hidden">
-      {" "}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        /* Hide scrollbar for horizontal scroll areas */
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `,
-        }}
-      />
+    <div className=" text-white bg-[#0a0a0a] selection:bg-[#10B981]/30 overflow-x-hidden">
       <main>
         <Hero />
         <DeveloperStandard />
