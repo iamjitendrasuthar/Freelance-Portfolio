@@ -1,7 +1,7 @@
 "use client";
 
 import FadeIn from "@/utils/Common";
-import { CheckCircle2, Diamond, XCircle, Sparkles, Terminal } from "lucide-react";
+import { CheckCircle2, Diamond, XCircle, Sparkles, Terminal, Code2 } from "lucide-react";
 
 const COMPARISON = [
   // The "Bad" Traits (Typical/Average Developers)
@@ -36,7 +36,7 @@ const ComparisonSection = () => {
         <div className="text-center mb-12 md:mb-20">
           <FadeIn>
             <div className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-400 text-xs sm:text-sm font-medium mb-6 backdrop-blur-sm">
-              <Terminal size={14} />
+              <Code2 size={14} />
               <span className="uppercase tracking-widest">Developer Standards</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 tracking-tight text-white">

@@ -2,7 +2,7 @@
 
 import Button from "@/utils/Button";
 import FadeIn from "@/utils/Common";
-import { ArrowRight, Terminal } from "lucide-react";
+import { ArrowRight, Code2, Terminal } from "lucide-react";
 
 const CTASection = () => {
   return (
@@ -30,7 +30,7 @@ const CTASection = () => {
             <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
               {/* Dev Badge */}
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm">
-                <Terminal size={14} className="text-emerald-400" />
+                <Code2 size={14} className="text-emerald-400" />
                 <span className="text-gray-300 text-xs sm:text-sm font-medium tracking-wide uppercase">
                   Let's build the future
                 </span>

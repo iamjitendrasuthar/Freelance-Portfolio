@@ -45,7 +45,7 @@ const SERVICES = [
   },
 ];
 
-const ServicesGrid = () => {
+const TechExpertise = () => {
   return (
     <section id="services" className="py-20 md:py-32 bg-[#F9FAFB] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -53,7 +53,7 @@ const ServicesGrid = () => {
         <div className="text-center mb-16 md:mb-20 max-w-3xl mx-auto">
           <FadeIn>
             <div className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
-              <Sparkles size={16} />
+              <Code2 size={16} />
               <span className="uppercase tracking-widest">Tech Expertise</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
@@ -105,4 +105,4 @@ const ServicesGrid = () => {
   );
 };
 
-export default ServicesGrid;
+export default TechExpertise;

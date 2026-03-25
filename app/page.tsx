@@ -2,13 +2,13 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ValueProp from "@/components/ValueProp";
-import ServicesGrid from "@/components/ServicesGrid";
+import DeveloperStandard from "@/components/DeveloperStandard";
+import TechExpertise from "@/components/TechExpertise";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import SuccessCarousel from "@/components/SuccessCarousel";
+import MyPortfolio from "@/components/MyPortfolio";
 import ComparisonSection from "@/components/ComparisonSection";
-import Testimonials from "@/components/Testimonials";
-import TeamSection from "@/components/TeamSection";
+import SuccessStories from "@/components/SuccessStories";
+import TechnicalCapabilities from "@/components/TechnicalCapabilities";
 import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -34,13 +34,13 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <ValueProp />
-        <ServicesGrid />
+        <DeveloperStandard />
+        <TechExpertise />
         <WhyChooseUs />
-        <SuccessCarousel />
+        <MyPortfolio />
         <ComparisonSection />
-        <Testimonials />
-        <TeamSection />
+        <SuccessStories />
+        <TechnicalCapabilities />
         <FAQSection />
         <CTASection />
       </main>

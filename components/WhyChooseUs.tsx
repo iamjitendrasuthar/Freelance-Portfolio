@@ -2,7 +2,7 @@
 
 import FadeIn from "@/utils/Common";
 import { motion } from "framer-motion";
-import { BarChart3, Sparkles, ShieldCheck, Terminal, Cpu } from "lucide-react";
+import { BarChart3, Sparkles, ShieldCheck, Terminal, Cpu, Code2 } from "lucide-react";
 
 const WhyChooseUs = () => {
   return (
@@ -15,7 +15,7 @@ const WhyChooseUs = () => {
         {/* Header Section */}
         <FadeIn>
           <div className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-400 text-xs sm:text-sm font-medium mb-6 sm:mb-8 backdrop-blur-sm">
-            <Terminal size={16} />
+            <Code2 size={16} />
             <span className="uppercase tracking-widest">
               Engineering Excellence
             </span>

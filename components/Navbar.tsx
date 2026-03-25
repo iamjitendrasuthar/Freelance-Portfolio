@@ -94,7 +94,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               href={link.path} // Yahan standard <a> ki jagah Next.js Link use kiya gaya hai
-              className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition-all"
+              className="px-4 py-2 text-[16px] font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition-all"
             >
               {link.name}
             </Link>
@@ -106,7 +106,7 @@ const Navbar = () => {
           <Link href="/contact">
             <Button
               variant="primary"
-              className="py-2 px-6 text-sm shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-shadow cursor-pointer"
+              className="py-2.5 px-7 text-[18px] font-medium font-satoshi text-[#0A0A0A] cursor-pointer"
             >
               Contact us
             </Button>
@@ -139,11 +139,9 @@ const Navbar = () => {
                   {/* <Link> component inside framer-motion */}
                   <Link
                     href={link.path}
-                    className="flex items-center justify-between p-4 text-lg font-medium text-gray-300 hover:text-emerald-400 hover:bg-white/5 rounded-2xl transition-all"
-                    onClick={() => setIsOpen(false)}
+                    className="flex items-center  justify-between p-4 text-lg font-medium text-gray-300 hover:text-emerald-400 hover:bg-white/5 rounded-2xl transition-all"
                   >
                     {link.name}
-                    <ChevronRight size={18} className="opacity-40" />
                   </Link>
                 </motion.div>
               ))}
@@ -152,7 +150,7 @@ const Navbar = () => {
                 <Link href="/contact">
                   <Button
                     variant="primary"
-                    className="w-full justify-center py-4 text-base font-semibold shadow-lg shadow-emerald-500/20"
+                    className="w-full justify-center py-4 text-[18px] font-medium font-satoshi text-[#0A0A0A] cursor-pointer"
                   >
                     Contact us
                   </Button>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import FadeIn from "@/utils/Common";
-import { Sparkles, Terminal } from "lucide-react";
+import { Code2, Sparkles, Terminal } from "lucide-react";
 import FAQItem from "./FAQItem";
 
 const FAQS = [
@@ -48,7 +48,7 @@ const FAQSection = () => {
         <div className="text-center mb-12 md:mb-16">
           <FadeIn>
             <div className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
-              <Terminal size={16} />
+              <Code2 size={16} />
               <span className="uppercase tracking-widest">Technical FAQ</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">

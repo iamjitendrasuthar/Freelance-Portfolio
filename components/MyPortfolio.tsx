@@ -34,7 +34,7 @@ const SUCCESS_STORIES = [
   },
 ];
 
-const SuccessStories = () => {
+const MyPortfolio = () => {
   return (
     <section id="work" className="py-20 md:py-32 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -42,7 +42,7 @@ const SuccessStories = () => {
         <div className="mb-12 md:mb-20">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
-              <Terminal size={16} />
+              <Code2 size={16} />
               <span className="uppercase tracking-widest">My Portfolio</span>
             </div>
 
@@ -123,4 +123,4 @@ const SuccessStories = () => {
   );
 };
 
-export default SuccessStories;
+export default MyPortfolio;

@@ -120,7 +120,7 @@ const ExpertiseCard = ({ item, index }: { item: any; index: number }) => {
   );
 };
 
-const ExpertiseSection = () => {
+const TechnicalCapabilities = () => {
   return (
     <section
       id="about"
@@ -146,7 +146,7 @@ const ExpertiseSection = () => {
         <div className="mb-20 text-center lg:text-left flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <FadeIn className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold mb-6 tracking-widest uppercase">
-              <Binary size={14} />
+              <Code2 size={16} />
               <span>Technical Capabilities</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
@@ -174,4 +174,4 @@ const ExpertiseSection = () => {
   );
 };
 
-export default ExpertiseSection;
+export default TechnicalCapabilities;

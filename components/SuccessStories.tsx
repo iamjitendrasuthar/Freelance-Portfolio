@@ -42,7 +42,7 @@ const TESTIMONIALS = [
   },
 ];
 
-const Testimonials = () => {
+const SuccessStories = () => {
   return (
     <section
       id="testimonials"
@@ -127,4 +127,5 @@ const Testimonials = () => {
   );
 };
 
-export default Testimonials;
+export default SuccessStories
+;
