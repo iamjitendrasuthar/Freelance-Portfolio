@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,11 +19,26 @@
   }
 }
 
-
 body {
-  /* This creates the exact subtle grid from the video */
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Manrope", Arial, Helvetica, sans-serif;
+}
+
+/* ✅ Fix for Autofill Background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  /* This creates an internal shadow that covers the blue background */
+  -webkit-box-shadow: 0 0 0px 1000px #2a2a2a inset !important;
+  /* This sets the text color to white */
+  -webkit-text-fill-color: white !important;
+  /* Smooth transition for the background */
+  transition: background-color 5000s ease-in-out 0s;
 }
