@@ -1,20 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import FadeIn from "@/utils/Common";
 import { Mail, MapPin, Send, MessageSquare, Phone } from "lucide-react";
 import { TwitterIcon, GithubIcon, LinkedinIcon } from "@/utils/Icons";
+import emailjs from "@emailjs/browser";
+import toast, { Toaster } from "react-hot-toast";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ✅ EmailJS Send Logic
+  const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
-    setTimeout(() => {
+    const toastId = toast.loading("Sending your message...");
+
+    try {
+      await emailjs.sendForm(
+        "service_yh5gznc", // Your Service ID
+        "template_aa6vn4r", // Your Template ID
+        formRef.current!,
+        "d0D0yVwnwK4bBx3-I", // Your Public Key
+      );
+
+      toast.success("Message sent successfully! ✅", { id: toastId });
+      formRef.current?.reset();
+    } catch (err) {
+      toast.error("Failed to send. Please try again. 😢", { id: toastId });
+      console.error("EmailJS Error:", err);
+    } finally {
       setIsSubmitting(false);
-      alert("Message sent successfully!");
-    }, 2000);
+    }
   };
 
   const SOCIAL_LINKS = [
@@ -25,6 +45,8 @@ const Contact = () => {
 
   return (
     <main className="w-full min-h-screen bg-white">
+      {/* ✅ Toaster for Notifications */}
+      <Toaster position="top-right" />
       {/* =========================================
           HERO SECTION (DARK THEME) 
       ========================================= */}
@@ -77,13 +99,18 @@ const Contact = () => {
               {/* Top Accent Line */}
               <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-400" />
 
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <form
+                ref={formRef}
+                onSubmit={sendEmail}
+                className="flex flex-col gap-6"
+              >
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">
                       Your Name
                     </label>
                     <input
+                      name="name"
                       type="text"
                       required
                       placeholder="Jitendra Suthar"
@@ -95,6 +122,7 @@ const Contact = () => {
                       Email Address
                     </label>
                     <input
+                      name="email"
                       type="email"
                       required
                       placeholder="jitendra@example.com"
@@ -120,6 +148,7 @@ const Contact = () => {
                       Phone
                     </label>
                     <input
+                      name="phone"
                       type="tel"
                       required
                       placeholder="+91 95219XXXXX"
@@ -133,6 +162,7 @@ const Contact = () => {
                     Message
                   </label>
                   <textarea
+                    name="message"
                     required
                     rows={4}
                     placeholder="Tell me about your project..."
@@ -143,7 +173,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-3 bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 transition-all disabled:opacity-70 mt-2 group shadow-lg cursor-pointer"
+                  className="w-full flex items-center justify-center gap-3 bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                   {!isSubmitting && (
