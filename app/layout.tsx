@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppWidget from "@/utils/WhatsAppWidget";
 
 export const metadata = {
   title: "Freelance Portfolio",
@@ -20,8 +21,11 @@ export default function RootLayout({
     <html lang="en" className="overflow-x-hidden">
       <body className="overflow-x-hidden">
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen">
+          {children}
+        </main>
         <Footer />
+          <WhatsAppWidget />
       </body>
     </html>
   );
