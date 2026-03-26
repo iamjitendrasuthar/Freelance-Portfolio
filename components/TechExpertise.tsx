@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
+import Link from "next/link";
 
 const SERVICES = [
   {
@@ -93,10 +94,12 @@ const TechExpertise = () => {
                 </p>
 
                 {/* Bottom Interactive Arrow */}
-                <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-emerald-500 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                  <span>Learn more</span>
-                  <ArrowRight size={16} />
-                </div>
+                <Link href={"/services"}>
+                  <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-emerald-500 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                    <span>Learn more</span>
+                    <ArrowRight size={16} />
+                  </div>
+                </Link>
               </div>
             </FadeIn>
           ))}
