@@ -150,7 +150,8 @@ const Navbar = () => {
 
             {/* The Actual Right Drawer */}
             <motion.div
-              variants={menuVariants}
+              // @ts-ignore
+              variants={menuVariants as any}
               initial="initial"
               animate="animate"
               exit="exit"
