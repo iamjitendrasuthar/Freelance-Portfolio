@@ -25,11 +25,11 @@ const TECH_STACK = [
 
 const Hero = () => {
   return (
-    <section className="relative w-full min-h-screen bg-[#051814] overflow-hidden overflow-x-hidden pt-28 md:pt-40 pb-20 md:pb-20 flex items-center">
-      {/* Background Glow Effects */}
-      <div className="absolute top-[-10%] left-[-10%] w-[70%] md:w-[50%] h-[50%] bg-emerald-500/15 blur-[100px] md:blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] md:w-[40%] h-[40%] bg-teal-500/10 blur-[80px] md:blur-[100px] rounded-full pointer-events-none" />
-
+    <section className="relative w-full min-h-screen bg-[#051814] overflow-hidden transform-gpu pt-28 md:pt-40 pb-20 flex items-center">
+      {" "}
+      {/* OPTIMIZED: Background Glow Effects - Mobile par blur kam kiya (100px -> 60px) */}
+      <div className="absolute top-[-10%] left-[-10%] w-[70%] md:w-[50%] h-[50%] bg-emerald-500/15 blur-[60px] md:blur-[120px] rounded-full pointer-events-none transform-gpu" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] md:w-[40%] h-[40%] bg-teal-500/10 blur-[50px] md:blur-[100px] rounded-full pointer-events-none transform-gpu" />
       {/* Subtle Grid Background */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"
@@ -40,9 +40,9 @@ const Hero = () => {
             "radial-gradient(circle at center, black 30%, transparent 80%)",
           WebkitMaskImage:
             "radial-gradient(circle at center, black 30%, transparent 80%)",
+          willChange: "mask-image",
         }}
       />
-
       {/* INCREASED GAP on Mobile from gap-12 to gap-16 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full flex flex-col lg:grid lg:grid-cols-2 gap-16 lg:gap-8 items-center relative z-10">
         {/* Left Text Content */}
@@ -86,7 +86,7 @@ const Hero = () => {
 
           {/* AUTO-SLIDER TECH STACK - ADDED MORE TOP MARGIN */}
           <motion.div
-            className="mt-16 sm:mt-20 w-full overflow-hidden relative"
+            className="mt-16 sm:mt-20 w-full overflow-hidden relative transform-gpu"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -97,7 +97,7 @@ const Hero = () => {
 
             <div className="relative w-full max-w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
               <motion.div
-                className="flex gap-10 sm:gap-8 items-center w-max"
+                className="flex gap-10 sm:gap-8 items-center w-max transform-gpu"
                 initial={{ x: 0 }}
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{
@@ -129,7 +129,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }} // Base delay: 0
-            className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-md"
+            className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-md transform-gpu"
           >
             <div className="absolute inset-0 bg-gradient-to-t from-[#051814] via-transparent to-transparent z-10 opacity-80" />
             <img
@@ -152,7 +152,7 @@ const Hero = () => {
               x: { delay: 0.5, duration: 0.5 },
               y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }, // Loop delay thoda zyada
             }}
-            className="absolute top-[60%] sm:top-[50%] -left-2 sm:-left-8 md:-left-12 bg-white/10 backdrop-blur-xl p-3 sm:p-4 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.25)] z-20 scale-90 sm:scale-100 origin-left"
+            className="absolute top-[60%] sm:top-[50%] -left-2 sm:-left-8 md:-left-12 bg-white/10 backdrop-blur-xl p-3 sm:p-4 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.25)] z-20 scale-90 sm:scale-100 origin-left transform-gpu"
           >
             {/* ... Card Content ... */}
             <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 p-2 sm:p-3 rounded-lg sm:rounded-xl text-white shadow-inner relative z-10">
@@ -186,7 +186,7 @@ const Hero = () => {
                 delay: 1.3,
               },
             }}
-            className="absolute bottom-[10%] sm:bottom-[10%] -left-4 sm:-left-12 md:-left-16 lg:-left-20 bg-white/10 backdrop-blur-xl p-3 sm:p-5 rounded-xl sm:rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.25)] z-20 scale-90 sm:scale-100 origin-left"
+            className="absolute bottom-[10%] sm:bottom-[10%] -left-4 sm:-left-12 md:-left-16 lg:-left-20 bg-white/10 backdrop-blur-xl p-3 sm:p-5 rounded-xl sm:rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.25)] z-20 scale-90 sm:scale-100 origin-left transform-gpu"
           >
             {/* ... Card Content ... */}
             <p className="text-gray-300 text-[10px] sm:text-xs uppercase tracking-wider font-semibold mb-1 sm:mb-3 text-left relative z-10">
@@ -225,13 +225,13 @@ const Hero = () => {
                 delay: 1.5,
               },
             }}
-            className="absolute top-[-4%] right-0 sm:right-[-20px] bg-white/10 backdrop-blur-xl p-3 sm:p-4 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.25)] z-20"
+            className="transform-gpu absolute top-[-4%] right-0 sm:right-[-20px] bg-white/10 backdrop-blur-xl p-3 sm:p-4 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.25)] z-20"
           >
             {/* ... SVG Content ... */}
             <motion.div
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="relative z-10 text-emerald-400"
+              className="relative z-10 text-emerald-400 transform-gpu"
             >
               <svg
                 className="w-5 h-5 sm:w-7 sm:h-7"
