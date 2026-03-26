@@ -64,7 +64,7 @@ const Work = () => {
       {/* =========================================
           HERO SECTION (DARK THEME) 
       ========================================= */}
-      <section className="relative bg-[#051814] pt-32 pb-24 md:pt-40 md:pb-32 z-10 overflow-hidden">
+      <section className="relative bg-[#051814] pt-32 pb-24 md:pt-40 md:pb-32 z-10 overflow-hidden h-screen">
         {/* Animated Background Glows */}
         <div className="absolute inset-0 pointer-events-none z-0">
           <motion.div
@@ -121,7 +121,7 @@ const Work = () => {
       {/* =========================================
           PROJECTS GRID (LIGHT THEME) 
       ========================================= */}
-      <section className="relative z-20 px-4 sm:px-6 py-20 md:py-32">
+      <section className="relative z-20 px-4 sm:px-6 -mt-85 md:-mt-45">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {PROJECTS.map((project, idx) => (
