@@ -258,7 +258,8 @@ const About = () => {
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${tech.progress}%` }}
-                          viewport={{ once: true, margin: "-50px" }}
+                          /* FIX: Removed margin: "-50px" and added amount: 0.1 for better mobile detection */
+                          viewport={{ once: true, amount: 0.1 }}
                           transition={{
                             duration: 1.2,
                             ease: "easeOut",
@@ -295,7 +296,8 @@ const About = () => {
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${lang.progress}%` }}
-                          viewport={{ once: true, margin: "-50px" }}
+                          /* FIX: Removed margin: "-50px" and added amount: 0.1 for better mobile detection */
+                          viewport={{ once: true, amount: 0.1 }}
                           transition={{
                             duration: 1.2,
                             ease: "easeOut",
