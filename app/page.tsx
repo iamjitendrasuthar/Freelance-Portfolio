@@ -8,7 +8,7 @@ import MyPortfolio from "@/components/MyPortfolio";
 import ComparisonSection from "@/components/ComparisonSection";
 import SuccessStories from "@/components/SuccessStories";
 import TechnicalCapabilities from "@/components/TechnicalCapabilities";
-import FAQSection from "@/components/FAQSection";
+// import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
 
 export default function Home() {
