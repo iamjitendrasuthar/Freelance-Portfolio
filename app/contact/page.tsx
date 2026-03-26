@@ -27,24 +27,29 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative w-full min-h-screen bg-[#051814] py-24 md:py-32 overflow-hidden overflow-x-hidden flex items-center pt-28 md:pt-40"
+      className="relative w-full min-h-screen bg-[#051814] py-24 md:py-32 flex items-center pt-28 md:pt-40"
     >
-      {/* Background Glows */}
-      <div className="absolute top-[-10%] right-[-5%] w-[60%] md:w-[40%] h-[50%] bg-emerald-500/10 blur-[100px] md:blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[50%] md:w-[40%] h-[40%] bg-teal-500/10 blur-[80px] md:blur-[100px] rounded-full pointer-events-none" />
+      {/* FIX: Background elements wrap inside an absolute inset container with overflow-hidden.
+        This prevents scroll flickering and white space issues on mobile.
+      */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Background Glows with transform-gpu for smooth rendering */}
+        <div className="absolute top-[-10%] right-[-5%] w-[60%] md:w-[40%] h-[50%] bg-emerald-500/10 blur-[100px] md:blur-[120px] rounded-full transform-gpu" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[50%] md:w-[40%] h-[40%] bg-teal-500/10 blur-[80px] md:blur-[100px] rounded-full transform-gpu" />
 
-      {/* Subtle Grid */}
-      <div
-        className="absolute inset-0 opacity-[0.05] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-          backgroundSize: "3rem 3rem",
-          maskImage:
-            "radial-gradient(circle at center, black 40%, transparent 80%)",
-          WebkitMaskImage:
-            "radial-gradient(circle at center, black 40%, transparent 80%)",
-        }}
-      />
+        {/* Subtle Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+            backgroundSize: "3rem 3rem",
+            maskImage:
+              "radial-gradient(circle at center, black 40%, transparent 80%)",
+            WebkitMaskImage:
+              "radial-gradient(circle at center, black 40%, transparent 80%)",
+          }}
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full relative z-10">
         {/* Mobile Header (Only visible on Mobile, hidden on Desktop) */}
@@ -157,7 +162,7 @@ const Contact = () => {
                     <input
                       type="text"
                       required
-                      placeholder="John Doe"
+                      placeholder="Jitendra suthar"
                       className="w-full bg-[#051814]/50 border border-white/10 rounded-xl px-4 py-3 sm:py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
                     />
                   </div>
@@ -170,7 +175,7 @@ const Contact = () => {
                     <input
                       type="email"
                       required
-                      placeholder="john@example.com"
+                      placeholder="jitendra@example.com"
                       className="w-full bg-[#051814]/50 border border-white/10 rounded-xl px-4 py-3 sm:py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
                     />
                   </div>

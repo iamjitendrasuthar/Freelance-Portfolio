@@ -36,7 +36,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   /* This creates an internal shadow that covers the blue background */
-  -webkit-box-shadow: 0 0 0px 1000px #2a2a2a inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px #051814/50 inset !important;
   /* This sets the text color to white */
   -webkit-text-fill-color: white !important;
   /* Smooth transition for the background */
