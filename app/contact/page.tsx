@@ -55,9 +55,9 @@ const Contact = () => {
         {/* Mobile Header (Only visible on Mobile, hidden on Desktop) */}
         <div className="block lg:hidden text-center mb-10 w-full">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold mb-6 tracking-widest uppercase w-max">
+            <div className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-400 text-xs sm:text-sm font-medium mb-6 sm:mb-8 backdrop-blur-sm">
               <MessageSquare size={14} />
-              <span>Get In Touch</span>
+              <span className="uppercase tracking-widest">Get In Touch</span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-[1.1] mb-4">
               Let's build something <br className="hidden lg:block" />
@@ -79,9 +79,11 @@ const Contact = () => {
             {/* Desktop Header (Hidden on Mobile) */}
             <div className="hidden lg:block">
               <FadeIn>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold mb-6 tracking-widest uppercase w-max">
+                <div className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm">
                   <MessageSquare size={14} />
-                  <span>Get In Touch</span>
+                  <span className="uppercase tracking-widest">
+                    Get In Touch
+                  </span>
                 </div>
                 <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
                   Let's build something <br />
