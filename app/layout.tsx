@@ -5,10 +5,10 @@ import Footer from "@/components/Footer";
 import WhatsAppWidget from "@/utils/WhatsAppWidget";
 
 export const metadata = {
-  title: "Freelance Portfolio",
-  description: "Web Development",
+  title: "SutharX",
+  description: "Freelance Website",
   icons: {
-    icon: "https://framerusercontent.com/sites/icons/default-favicon-dark.v1.png",
+    icon: "/icons8-coderwall-24 (1).png",
   },
 };
 
@@ -21,11 +21,9 @@ export default function RootLayout({
     <html lang="en" className="overflow-x-hidden">
       <body className="overflow-x-hidden">
         <Navbar />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
-          <WhatsAppWidget />
+        <WhatsAppWidget />
       </body>
     </html>
   );
