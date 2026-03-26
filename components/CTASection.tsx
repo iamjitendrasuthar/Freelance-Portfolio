@@ -3,6 +3,7 @@
 import Button from "@/utils/Button";
 import FadeIn from "@/utils/Common";
 import { ArrowRight, Code2 } from "lucide-react";
+import Link from "next/link";
 
 const CTASection = () => {
   return (
@@ -56,13 +57,15 @@ const CTASection = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                <Button
-                  variant="primary"
-                  className="w-full sm:w-auto text-base sm:text-lg px-8 py-4 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
-                >
-                  Start a Conversation
-                  <ArrowRight size={20} className="animate-pulse" />
-                </Button>
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <Button
+                    variant="primary"
+                    className="w-full text-base sm:text-lg px-8 py-4 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
+                  >
+                    Start a Conversation
+                    <ArrowRight size={20} className="animate-pulse" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

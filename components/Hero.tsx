@@ -3,7 +3,8 @@
 import Button from "@/utils/Button";
 import FadeIn from "@/utils/Common";
 import { motion } from "framer-motion";
-import { Code, Rocket, Sparkles } from "lucide-react";
+import { Code, Rocket } from "lucide-react";
+import Link from "next/link";
 
 const TECH_STACK = [
   "Next.js",
@@ -70,18 +71,23 @@ const Hero = () => {
             delay={0.4}
             className="w-full flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 sm:gap-4"
           >
-            <Button
-              variant="primary"
-              className="w-full sm:w-max transition-shadow flex justify-center py-3 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
-            >
-              Let's Build Something
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full sm:w-max hover:bg-white/5 border-white/20 text-white flex justify-center py-3"
-            >
-              View My Work
-            </Button>
+            <Link href="/contact" className="w-full sm:w-max">
+              <Button
+                variant="primary"
+                className="w-full transition-shadow flex justify-center py-3 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
+              >
+                Let's Build Something
+              </Button>
+            </Link>
+
+            <Link href="/work" className="w-full sm:w-max">
+              <Button
+                variant="outline"
+                className="w-full hover:bg-white/5 border-white/20 text-white flex justify-center py-3"
+              >
+                View My Work
+              </Button>
+            </Link>
           </FadeIn>
 
           {/* AUTO-SLIDER TECH STACK - ADDED MORE TOP MARGIN */}
