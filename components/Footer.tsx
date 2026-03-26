@@ -101,7 +101,12 @@ const Footer = () => {
                   size={28}
                 />
               </div>
-              <span className="tracking-tight">Upreach</span>
+              <span className="tracking-tight">
+                Suthar
+                <span className="text-emerald-400 text-xl md:text-3xl font-semibold px-1">
+                  X
+                </span>
+              </span>{" "}
             </Link>
 
             <h4 className="text-xl sm:text-2xl font-bold mb-4 tracking-tight">
@@ -186,7 +191,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-500">
-          <p>Copyright © {currentYear} Upreach. All Rights Reserved.</p>
+          <p>Copyright © {currentYear} SutharX. All Rights Reserved.</p>
 
           <div className="flex items-center gap-6">
             <a

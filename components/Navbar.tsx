@@ -285,7 +285,12 @@ const Navbar = () => {
               size={24}
             />
           </div>
-          <span className="tracking-tight">Upreach</span>
+          <span className="tracking-tight">
+            Suthar
+            <span className="text-emerald-400 text-xl md:text-3xl font-semibold px-1">
+              X
+            </span>
+          </span>{" "}
         </Link>
 
         {/* Desktop Links */}
@@ -366,7 +371,12 @@ const Navbar = () => {
                       size={22}
                     />
                   </div>
-                  <span className="tracking-tight">Upreach</span>
+                  <span className="tracking-tight">
+                    Suthar
+                    <span className="text-emerald-400 text-xl md:text-3xl font-semibold px-1">
+                      X
+                    </span>
+                  </span>{" "}
                 </Link>
               </div>
 
