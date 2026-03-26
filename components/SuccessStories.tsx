@@ -44,12 +44,13 @@ const TESTIMONIALS = [
 
 const SuccessStories = () => {
   return (
-    <section
-      id="testimonials"
-      className="py-20 md:py-32 bg-[#F9FAFB] relative overflow-hidden"
-    >
-      {/* Subtle Background Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+    // FIX: Removed overflow-hidden from the root section
+    <section id="testimonials" className="py-20 md:py-32 bg-[#F9FAFB] relative">
+      {/* FIX: Moved background elements into a dedicated wrapper with overflow-hidden */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Subtle Background Elements with transform-gpu */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full transform-gpu" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Header Section */}
@@ -59,6 +60,8 @@ const SuccessStories = () => {
               <Code2 size={16} />
               <span className="uppercase tracking-widest">Success Stories</span>
             </div>
+
+            {/* Header Text - Ensure heading is correctly grouped */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
               What my clients{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
@@ -76,6 +79,7 @@ const SuccessStories = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {TESTIMONIALS.map((testimonial, idx) => (
             <FadeIn key={idx} delay={idx * 0.1} className="h-full">
+              {/* FIX: Ensure container rendering is smooth without transform glitches */}
               <div className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col h-full relative group hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.15)] hover:-translate-y-1 transition-all duration-300">
                 {/* Decorative Quote Icon Background */}
                 <Quote
@@ -127,5 +131,4 @@ const SuccessStories = () => {
   );
 };
 
-export default SuccessStories
-;
+export default SuccessStories;

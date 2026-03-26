@@ -73,8 +73,9 @@ const TechExpertise = () => {
         {/* Services Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {SERVICES.map((service, idx) => (
-            <FadeIn key={idx} delay={idx * 0.1}>
-              <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.15)] hover:-translate-y-1 hover:border-emerald-100 transition-all duration-300 h-full flex flex-col group cursor-pointer relative overflow-hidden">
+            <FadeIn key={idx} delay={idx * 0.1} className="h-full">
+              {/* FIX: Added transform-gpu to offload hover animations (translate/scale) to the GPU */}
+              <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.15)] hover:-translate-y-1 hover:border-emerald-100 transition-all duration-300 h-full flex flex-col group cursor-pointer relative overflow-hidden transform-gpu">
                 {/* Top Border Highlight on Hover */}
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 

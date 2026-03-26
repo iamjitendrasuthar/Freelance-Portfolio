@@ -119,7 +119,7 @@ const Navbar = () => {
           <Link href="/contact">
             <Button
               variant="primary"
-              className="py-2.5 px-7 text-[18px] font-medium font-satoshi text-[#0A0A0A] cursor-pointer"
+              className="py-2.5 px-7 text-[18px] font-medium font-satoshi text-[#0A0A0A] cursor-pointer shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
             >
               Contact us
             </Button>
@@ -169,7 +169,7 @@ const Navbar = () => {
                 <Link href="/contact">
                   <Button
                     variant="primary"
-                    className="w-full py-4 text-[#0A0A0A]"
+                    className="w-full py-4 text-[#0A0A0A] shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
                   >
                     Contact us
                   </Button>

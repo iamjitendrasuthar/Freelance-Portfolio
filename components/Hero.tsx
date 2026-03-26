@@ -72,7 +72,7 @@ const Hero = () => {
           >
             <Button
               variant="primary"
-              className="w-full sm:w-max transition-shadow flex justify-center py-3"
+              className="w-full sm:w-max transition-shadow flex justify-center py-3 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
             >
               Let's Build Something
             </Button>

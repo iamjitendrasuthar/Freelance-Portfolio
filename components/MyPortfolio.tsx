@@ -67,8 +67,15 @@ const MyPortfolio = () => {
           {SUCCESS_STORIES.map((story, idx) => (
             <FadeIn key={idx} delay={idx * 0.1}>
               <div className="group cursor-pointer">
-                {/* Image Container */}
-                <div className="relative aspect-[16/10] rounded-[2rem] overflow-hidden mb-6 shadow-lg border border-gray-100 bg-gray-50">
+                {/* FIX: Added transform-gpu aur mask-image to fix iOS Safari 
+                  border-radius clipping bug during scale animation.
+                */}
+                <div
+                  className="relative aspect-[16/10] rounded-[2rem] overflow-hidden mb-6 shadow-lg border border-gray-100 bg-gray-50 transform-gpu"
+                  style={{
+                    WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+                  }}
+                >
                   <img
                     src={story.img}
                     alt={story.title}
@@ -76,15 +83,15 @@ const MyPortfolio = () => {
                   />
 
                   {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none" />
 
                   {/* Tech Tag (Top Left) */}
-                  <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs uppercase font-bold px-4 py-1.5 rounded-full">
+                  <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs uppercase font-bold px-4 py-1.5 rounded-full pointer-events-none">
                     {story.tech}
                   </div>
 
                   {/* Stats Overlay (Bottom) */}
-                  <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
                     {story.stats.map((stat, i) => (
                       <div
                         key={i}

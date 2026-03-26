@@ -62,10 +62,14 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#051814] text-white pt-20 pb-8 relative overflow-hidden border-t border-white/5">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
-      <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+    // FIX: Removed overflow-hidden from root footer
+    <footer className="bg-[#051814] text-white pt-20 pb-8 relative border-t border-white/5">
+      {/* FIX: Dedicated background wrapper for overflow-hidden and GPU acceleration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Subtle Background Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
+        <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full transform-gpu" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
@@ -74,7 +78,8 @@ const Footer = () => {
             {/* Logo */}
             <div className="flex items-center gap-2 text-white font-bold text-2xl mb-8 cursor-pointer w-fit">
               <div className="relative flex items-center justify-center">
-                <div className="absolute inset-0 bg-emerald-500/40 blur-[10px] rounded-full" />
+                {/* FIX: Added transform-gpu to the small blur as well just to be safe */}
+                <div className="absolute inset-0 bg-emerald-500/40 blur-[10px] rounded-full transform-gpu" />
                 <Diamond
                   className="text-emerald-400 fill-emerald-500/20 relative z-10"
                   size={28}

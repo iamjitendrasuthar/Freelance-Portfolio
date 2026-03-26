@@ -1,29 +1,33 @@
 "use client";
 
 import FadeIn from "@/utils/Common";
-import { Sparkles, Code2 } from "lucide-react";
+import { Code2 } from "lucide-react";
 
 const ValueProp = () => {
   return (
-    <section className="py-20 md:py-32 bg-white relative overflow-hidden flex items-center justify-center">
+    // FIX: Removed overflow-hidden from root section
+    <section className="py-20 md:py-32 bg-white relative flex items-center justify-center">
       {/* Top Border Divider */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
 
-      {/* Subtle Background Glow Elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-3xl h-[300px] bg-emerald-500/5 blur-[100px] rounded-full pointer-events-none" />
+      {/* FIX: Created a dedicated background wrapper with overflow-hidden */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Subtle Background Glow Elements with transform-gpu */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-3xl h-[300px] bg-emerald-500/5 blur-[100px] rounded-full transform-gpu" />
 
-      {/* Grid Background */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(to right, #000000 1px, transparent 1px), linear-gradient(to bottom, #000000 1px, transparent 1px)`,
-          backgroundSize: "3rem 3rem",
-          maskImage:
-            "radial-gradient(circle at center, black 50%, transparent 90%)",
-          WebkitMaskImage:
-            "radial-gradient(circle at center, black 50%, transparent 90%)",
-        }}
-      />
+        {/* Grid Background */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(to right, #000000 1px, transparent 1px), linear-gradient(to bottom, #000000 1px, transparent 1px)`,
+            backgroundSize: "3rem 3rem",
+            maskImage:
+              "radial-gradient(circle at center, black 50%, transparent 90%)",
+            WebkitMaskImage:
+              "radial-gradient(circle at center, black 50%, transparent 90%)",
+          }}
+        />
+      </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
         {/* Eyebrow Badge */}
