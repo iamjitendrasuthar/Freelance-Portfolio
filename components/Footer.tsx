@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Button from "@/utils/Button";
 import { Diamond, ArrowRight, Mail } from "lucide-react";
 
@@ -20,7 +21,7 @@ const TwitterIcon = ({ size = 20, className = "" }) => (
     <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
   </svg>
 );
-// --- Custom GitHub Icon (Lucide Style) ---
+
 const GithubIcon = ({ size = 20, className = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -58,27 +59,42 @@ const LinkedinIcon = ({ size = 20, className = "" }) => (
   </svg>
 );
 
+// FIX: Structured Footer Links to match Navbar routes
+const FOOTER_LINKS = {
+  navigation: [
+    { name: "Home", path: "/" },
+    { name: "Work", path: "/work" },
+    { name: "About", path: "/about" },
+    { name: "Services", path: "/services" },
+  ],
+  support: [
+    { name: "Contact Us", path: "/contact" },
+    { name: "Privacy Policy", path: "/privacy-policy" },
+    { name: "Terms of Service", path: "/terms" },
+  ],
+};
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    // FIX: Removed overflow-hidden from root footer
     <footer className="bg-[#051814] text-white pt-20 pb-8 relative border-t border-white/5">
-      {/* FIX: Dedicated background wrapper for overflow-hidden and GPU acceleration */}
+      {/* Background Glows (GPU Accelerated) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        {/* Subtle Background Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
         <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full transform-gpu" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          {/* Brand & Newsletter (Takes up more space) */}
+          {/* Brand & Newsletter */}
           <div className="lg:col-span-6 pr-0 lg:pr-12">
             {/* Logo */}
-            <div className="flex items-center gap-2 text-white font-bold text-2xl mb-8 cursor-pointer w-fit">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-white font-bold text-2xl mb-8 cursor-pointer w-fit"
+            >
               <div className="relative flex items-center justify-center">
-                {/* FIX: Added transform-gpu to the small blur as well just to be safe */}
                 <div className="absolute inset-0 bg-emerald-500/40 blur-[10px] rounded-full transform-gpu" />
                 <Diamond
                   className="text-emerald-400 fill-emerald-500/20 relative z-10"
@@ -86,21 +102,23 @@ const Footer = () => {
                 />
               </div>
               <span className="tracking-tight">Upreach</span>
-            </div>
+            </Link>
 
             <h4 className="text-xl sm:text-2xl font-bold mb-4 tracking-tight">
               Stay Connected & Informed
             </h4>
             <p className="text-gray-400 mb-8 max-w-md leading-relaxed text-sm sm:text-base">
-              Subscribe to our newsletter for the latest marketing insights,
-              industry trends, and proven growth strategies to scale your
-              business.
+              Subscribe to my newsletter for the latest tech insights,
+              development trends, and proven strategies to scale your product.
             </p>
 
             {/* Newsletter Input */}
             <form
               className="flex flex-col sm:flex-row gap-3 max-w-md"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Subscribed successfully!"); // Added simple feedback
+              }}
             >
               <div className="relative flex-grow">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -125,49 +143,48 @@ const Footer = () => {
           {/* Spacer for Desktop */}
           <div className="hidden lg:block lg:col-span-2"></div>
 
-          {/* Links: Sections */}
+          {/* Quick Links (Mapped from FOOTER_LINKS) */}
           <div className="lg:col-span-2">
             <h4 className="font-bold text-lg mb-6 text-white tracking-wide">
-              Platform
+              Quick Links
             </h4>
             <ul className="space-y-4 text-gray-400">
-              {["Services", "Our Work", "Team", "Testimonials", "Pricing"].map(
-                (link) => (
-                  <li key={link}>
-                    <a
-                      href={`#${link.toLowerCase().replace(" ", "-")}`}
-                      className="hover:text-emerald-400 hover:translate-x-1 inline-block transition-all duration-300 text-sm sm:text-base"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ),
-              )}
+              {FOOTER_LINKS.navigation.map((link) => (
+                <li key={link.name}>
+                  {/* FIX: Replaced <a> with Next.js <Link> */}
+                  <Link
+                    href={link.path}
+                    className="hover:text-emerald-400 hover:translate-x-1 inline-block transition-all duration-300 text-sm sm:text-base"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Links: Information */}
+          {/* Support / Company Links */}
           <div className="lg:col-span-2">
             <h4 className="font-bold text-lg mb-6 text-white tracking-wide">
-              Company
+              Support
             </h4>
             <ul className="space-y-4 text-gray-400">
-              {["About Us", "Careers", "Blog", "Contact", "Privacy Policy"].map(
-                (link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="hover:text-emerald-400 hover:translate-x-1 inline-block transition-all duration-300 text-sm sm:text-base"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ),
-              )}
+              {FOOTER_LINKS.support.map((link) => (
+                <li key={link.name}>
+                  {/* FIX: Replaced <a> with Next.js <Link> */}
+                  <Link
+                    href={link.path}
+                    className="hover:text-emerald-400 hover:translate-x-1 inline-block transition-all duration-300 text-sm sm:text-base"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
+        {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-500">
           <p>Copyright © {currentYear} Upreach. All Rights Reserved.</p>
 
@@ -177,19 +194,25 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-emerald-400 transition-colors"
+              aria-label="GitHub"
             >
-              {/* Custom GitHub Icon used here */}
               <GithubIcon size={20} />
             </a>
             <a
-              href="#"
+              href="https://linkedin.com/in/your-username"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-500 hover:text-emerald-400 transition-colors"
+              aria-label="LinkedIn"
             >
               <LinkedinIcon size={20} />
             </a>
             <a
-              href="#"
+              href="https://twitter.com/your-username"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-500 hover:text-emerald-400 transition-colors"
+              aria-label="Twitter"
             >
               <TwitterIcon size={20} />
             </a>
