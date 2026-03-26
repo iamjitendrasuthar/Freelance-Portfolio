@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Pathname check karne ke liye
+import { usePathname } from "next/navigation";
 import { Diamond, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Button from "@/utils/Button";
@@ -14,43 +14,42 @@ const NAV_LINKS = [
   { name: "Services", path: "/services" },
 ];
 
-// --- Animations remains same ---
+// --- UPDATE: Right Side Drawer Animation ---
 const menuVariants = {
-  initial: { opacity: 0, y: -15 },
-  animate: {
+  initial: {
+    x: "100%", // Start entirely off-screen to the right
     opacity: 1,
-    y: 0,
+  },
+  animate: {
+    x: 0, // Slide in to the right edge
+    opacity: 1,
     transition: {
-      duration: 0.3,
-      ease: "easeOut",
-      staggerChildren: 0.05,
-      delayChildren: 0.1,
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1], // Custom smooth easing
     },
   },
   exit: {
-    opacity: 0,
-    y: -15,
+    x: "100%", // Slide back out to the right
+    opacity: 1,
     transition: {
-      duration: 0.2,
-      ease: "easeIn",
-      staggerChildren: 0.05,
-      staggerDirection: -1,
+      duration: 0.3,
+      ease: [0.7, 0, 0.84, 0],
     },
   },
 };
 
-const linkVariants = {
+// Overlay animation for the dark background
+const overlayVariants = {
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.2 } },
-  exit: { opacity: 0, transition: { duration: 0.1 } },
+  animate: { opacity: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, transition: { duration: 0.3 } },
 };
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname(); // Current path track karega
+  const pathname = usePathname();
 
-  // 1. Jab bhi pathname change ho (page change ho jaye), tab menu close karein
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
@@ -78,10 +77,10 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between relative">
-        {/* Logo (Bonus: Isko bhi Link bana diya taaki click karne pe Home par jaye) */}
+        {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl cursor-pointer z-50"
+          className="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl cursor-pointer z-[60]"
         >
           <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 bg-emerald-500/40 blur-[10px] rounded-full" />
@@ -97,7 +96,6 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-1 bg-white/5 border border-white/10 rounded-full px-2 py-1.5 backdrop-blur-md">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.path;
-
             return (
               <Link
                 key={link.name}
@@ -127,56 +125,68 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle Button */}
+        {/* UPDATE: Increased z-index to stay above the drawer */}
         <button
-          className="md:hidden relative z-50 p-2 text-gray-300"
+          className="md:hidden relative z-[60] p-2 text-gray-300 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown (Right Drawer) */}
       <AnimatePresence mode="wait">
         {isOpen && (
-          <motion.div
-            // @ts-ignore
-            variants={menuVariants as any}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="absolute top-0 left-0 right-0 bg-[#051814] md:hidden h-screen z-40 pt-24"
-          >
-            <div className="px-4 py-6 flex flex-col gap-2">
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.path;
+          <>
+            {/* Background Dark Overlay */}
+            <motion.div
+              variants={overlayVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+            />
 
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.path}
-                    className={`p-4 text-lg font-medium rounded-2xl transition-all ${
-                      isActive
-                        ? "text-emerald-400 bg-white/5"
-                        : "text-gray-300 hover:text-emerald-400"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
+            {/* The Actual Right Drawer */}
+            <motion.div
+              variants={menuVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="fixed top-0 right-0 h-screen w-[80vw] max-w-[320px] bg-[#030A0A] border-l border-white/10 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] md:hidden z-50 pt-24 px-6 flex flex-col"
+            >
+              <div className="flex flex-col gap-3">
+                {NAV_LINKS.map((link) => {
+                  const isActive = pathname === link.path;
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.path}
+                      className={`p-4 text-xl font-medium rounded-2xl transition-all ${
+                        isActive
+                          ? "text-emerald-400 bg-emerald-500/10"
+                          : "text-gray-300 hover:text-emerald-400 hover:bg-white/5"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
 
-              <div className="mt-8 px-2">
-                <Link href="/contact">
+              <div className="mt-auto mb-10 w-full">
+                <Link href="/contact" className="block w-full">
                   <Button
                     variant="primary"
-                    className="w-full py-4 text-[#0A0A0A] shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
+                    className="w-full py-4 text-lg text-[#0A0A0A] shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
                   >
                     Contact us
                   </Button>
                 </Link>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
