@@ -380,7 +380,11 @@ const Navbar = () => {
                 {NAV_LINKS.map((link) => {
                   const isActive = pathname === link.path;
                   return (
-                    <motion.div key={link.name} variants={itemVariants}>
+                    <motion.div
+                      key={link.name}
+                      // @ts-ignore
+                      variants={itemVariants as any}
+                    >
                       <Link
                         href={link.path}
                         className={`group flex items-center justify-between p-4 rounded-2xl transition-all duration-300 ${
