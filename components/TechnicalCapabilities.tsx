@@ -124,25 +124,12 @@ const ExpertiseCard = ({ item, index }: { item: any; index: number }) => {
 const TechnicalCapabilities = () => {
   return (
     // FIX: Removed overflow-hidden from root section
-    <section id="about" className="relative bg-[#030D0B] py-24 md:py-32">
-      {/* FIX: Dedicated wrapper with overflow-hidden for background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        {/* Background Glows with transform-gpu */}
-        <div className="absolute top-[-10%] left-[-10%] w-[70%] md:w-[50%] h-[50%] bg-emerald-500/15 blur-[100px] md:blur-[120px] rounded-full transform-gpu" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] md:w-[40%] h-[40%] bg-teal-500/10 blur-[80px] md:blur-[100px] rounded-full transform-gpu" />
-
-        {/* Subtle Grid Background */}
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-            backgroundSize: "3rem 3rem",
-            maskImage:
-              "radial-gradient(circle at center, black 30%, transparent 80%)",
-            WebkitMaskImage:
-              "radial-gradient(circle at center, black 30%, transparent 80%)",
-          }}
-        />
+    <section id="about" className="relative bg-[#051814]  py-24 md:py-32">
+      {/* FIX: Background Decor ko alag wrapper mein daala jisme overflow-hidden hai */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
+        {/* transform-gpu add kiya smooth rendering ke liye */}
+        <div className="absolute top-[20%] right-[-5%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full transform-gpu" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
