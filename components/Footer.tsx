@@ -125,7 +125,6 @@ const Footer = () => {
                 e.preventDefault();
 
                 const email = e.target[0].value;
-                console.log(email);
                 if (!email) {
                   toast.error("Please enter a valid email");
                   return;

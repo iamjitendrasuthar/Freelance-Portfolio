@@ -232,7 +232,7 @@ const Work = () => {
       {/* =========================================
           BOTTOM CTA SECTION
       ========================================= */}
-      <section className="-mt-10 md:-mt-20 relative z-20">
+      <section className="-mt-10 md: mt-10 relative z-20">
         <CTASection />
       </section>
     </main>
