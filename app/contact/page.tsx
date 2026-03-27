@@ -6,6 +6,7 @@ import { Mail, MapPin, Send, MessageSquare, Phone } from "lucide-react";
 import { TwitterIcon, GithubIcon, LinkedinIcon } from "@/utils/Icons";
 import emailjs from "@emailjs/browser";
 import toast, { Toaster } from "react-hot-toast";
+import Button from "@/utils/Button";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -169,11 +170,11 @@ const Contact = () => {
                     className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all resize-none"
                   ></textarea>
                 </div>
-
-                <button
+                <Button
+                  variant="primary"
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-3 bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+                  className="w-full transition-shadow flex justify-center py-3 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                   {!isSubmitting && (
@@ -181,8 +182,8 @@ const Contact = () => {
                       size={18}
                       className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
                     />
-                  )}
-                </button>
+                  )}{" "}
+                </Button>
               </form>
             </div>
           </FadeIn>
