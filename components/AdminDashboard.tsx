@@ -190,7 +190,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#051814] text-white pt-24 pb-12 sm:py-32 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto px-0 md:px-6 lg:px-8">
         {/* Header & Tabs Section */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-10 gap-6 border-b border-white/10 pb-4">
           <div className="w-full sm:w-auto">
