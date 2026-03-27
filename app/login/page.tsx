@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Lock, User, Loader2 } from "lucide-react";
+import { Lock, User, Loader2, Eye, EyeOff } from "lucide-react"; // Eye icons add kiye
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Password visibility state
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -25,9 +26,9 @@ const LoginPage = () => {
 
       if (res.ok) {
         toast.success("Welcome back, Admin!");
-        router.push("/admin/projects"); // Redirect to dashboard
+        router.push("/admin/projects");
       } else {
-        toast.error("Ghalat credentials hain!");
+        toast.error("Invalid username or password");
       }
     } catch (err) {
       toast.error("Something went wrong!");
@@ -37,7 +38,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#051814] flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="login-page-container min-h-screen bg-[#051814] flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full" />
 
@@ -57,6 +58,7 @@ const LoginPage = () => {
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
+          {/* Username Field */}
           <div className="space-y-2">
             <label className="text-xs text-gray-400 uppercase tracking-widest ml-1">
               Username
@@ -77,6 +79,7 @@ const LoginPage = () => {
             </div>
           </div>
 
+          {/* Password Field */}
           <div className="space-y-2">
             <label className="text-xs text-gray-400 uppercase tracking-widest ml-1">
               Password
@@ -87,13 +90,21 @@ const LoginPage = () => {
                 size={18}
               />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-[#051814] border border-white/10 rounded-xl py-3.5 pl-12 pr-4 text-white focus:border-emerald-500 focus:outline-none transition-all"
+                className="w-full bg-[#051814] border border-white/10 rounded-xl py-3.5 pl-12 pr-12 text-white focus:border-emerald-500 focus:outline-none transition-all"
                 placeholder="••••••••"
               />
+              {/* Show/Hide Toggle Button */}
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-emerald-500 transition-colors cursor-pointer"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
           </div>
 

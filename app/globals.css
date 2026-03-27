@@ -51,3 +51,19 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: #ffffff !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+.login-page-container input:-webkit-autofill,
+.login-page-container input:-webkit-autofill:hover,
+.login-page-container input:-webkit-autofill:focus,
+.login-page-container input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 100px #051814 inset !important;
+
+  /* 2. Text color strictly white */
+  -webkit-text-fill-color: white !important;
+
+  /* 3. Font properties fix */
+  font-family: inherit !important;
+  font-size: inherit !important;
+
+  transition: background-color 5000s ease-in-out 0s;
+}
