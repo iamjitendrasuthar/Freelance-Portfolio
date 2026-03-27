@@ -1,6 +1,5 @@
-// app/api/inquiries/route.ts
 import { NextResponse } from "next/server";
-import connectDB from "@/utils/mongodb"; // Apna path verify kar lein
+import connectDB from "@/utils/mongodb";
 import ClientInquiry from "@/models/ClientInquiry";
 
 export const dynamic = "force-dynamic";
@@ -8,7 +7,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     await connectDB();
-    const inquiries = await ClientInquiry.find({}).sort({ createdAt: -1 }); // Newest first
+    const inquiries = await ClientInquiry.find({}).sort({ createdAt: -1 });
     return NextResponse.json(
       { success: true, data: inquiries },
       { status: 200 },
@@ -25,10 +24,8 @@ export async function POST(req: Request) {
   try {
     await connectDB();
 
-    // Frontend se aaya data JSON mein convert karein
     const body = await req.json();
 
-    // Database mein naya record create karein
     const newInquiry = await ClientInquiry.create(body);
 
     return NextResponse.json(
