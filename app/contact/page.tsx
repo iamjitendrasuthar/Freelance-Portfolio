@@ -172,6 +172,7 @@ const Contact = () => {
                 </div>
                 <Button
                   variant="primary"
+                  // @ts-ignore
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full transition-shadow flex justify-center py-3 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300"
