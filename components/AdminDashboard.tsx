@@ -59,7 +59,19 @@ const AdminDashboard = () => {
     githubLink: "",
     featured: false,
   });
-
+  // Confirmation Modal States
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [confirmConfig, setConfirmConfig] = useState<{
+    title: string;
+    message: string;
+    onConfirm: () => void;
+    variant: "danger" | "warning";
+  }>({
+    title: "",
+    message: "",
+    onConfirm: () => {},
+    variant: "danger",
+  });
   // 1. FETCH PROJECTS
   const fetchProjects = async () => {
     try {
@@ -133,21 +145,6 @@ const AdminDashboard = () => {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this project?")) {
-      try {
-        const res = await fetch(`/api/projects/${id}`, { method: "DELETE" });
-        if (res.ok) {
-          setProjects(projects.filter((p) => p._id !== id));
-        } else {
-          alert("Failed to delete project");
-        }
-      } catch (error) {
-        console.error("Error deleting:", error);
-      }
-    }
-  };
-
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
@@ -190,18 +187,41 @@ const AdminDashboard = () => {
       setIsSaving(false);
     }
   };
-  const handleLogout = async () => {
-    if (confirm("Are you sure you want to logout?")) {
-      try {
+
+  // Updated Logout Handler
+  const handleLogoutClick = () => {
+    setConfirmConfig({
+      title: "Logout Confirmation",
+      message:
+        "Are you sure you want to end your session? You will need to login again to access the dashboard.",
+      variant: "warning",
+      onConfirm: async () => {
         const res = await fetch("/api/logout", { method: "POST" });
         if (res.ok) {
-          router.push("/login"); // Login page par wapas bhej dein
-          router.refresh(); // Page refresh karein taaki middleware trigger ho
+          router.push("/login");
+          router.refresh();
         }
-      } catch (error) {
-        console.error("Logout failed", error);
-      }
-    }
+      },
+    });
+    setIsConfirmOpen(true);
+  };
+
+  // Updated Delete Handler
+  const handleDeleteClick = (id: string) => {
+    setConfirmConfig({
+      title: "Delete Project",
+      message:
+        "This action cannot be undone. Are you sure you want to permanently delete this project?",
+      variant: "danger",
+      onConfirm: async () => {
+        const res = await fetch(`/api/projects/${id}`, { method: "DELETE" });
+        if (res.ok) {
+          setProjects(projects.filter((p) => p._id !== id));
+          setIsConfirmOpen(false);
+        }
+      },
+    });
+    setIsConfirmOpen(true);
   };
   return (
     <div className="min-h-screen bg-[#051814] text-white pt-24 pb-12 sm:py-32 px-4 sm:px-6 lg:px-8 font-sans">
@@ -216,7 +236,7 @@ const AdminDashboard = () => {
             </h1>
 
             <button
-              onClick={handleLogout}
+              onClick={handleLogoutClick}
               className="flex items-center gap-2 text-gray-400 hover:text-red-400 transition-colors text-xs sm:text-sm font-medium px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-white/5 border border-white/10 cursor-pointer shrink-0"
             >
               <LogOut size={16} className="sm:w-[18px] sm:h-[18px]" />
@@ -344,7 +364,7 @@ const AdminDashboard = () => {
                               <Pencil size={16} />
                             </button>
                             <button
-                              onClick={() => handleDelete(project._id)}
+                              onClick={() => handleDeleteClick(project._id)}
                               className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors"
                             >
                               <Trash2 size={16} />
@@ -619,6 +639,74 @@ const AdminDashboard = () => {
                   className="cursor-pointer bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-lg sm:rounded-xl font-medium transition-colors shadow-lg shadow-emerald-500/20 disabled:opacity-50 w-full sm:w-auto order-1 sm:order-2"
                 >
                   {isSaving ? "Saving..." : "Save Project"}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      {/* --- CUSTOM CONFIRMATION MODAL --- */}
+      <AnimatePresence>
+        {isConfirmOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsConfirmOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+
+            {/* Modal Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-[#0a241d] border border-white/10 rounded-[2rem] p-8 shadow-2xl overflow-hidden text-center"
+            >
+              {/* Top Icon */}
+              <div
+                className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 ${
+                  confirmConfig.variant === "danger"
+                    ? "bg-red-500/10 text-red-500 border border-red-500/20"
+                    : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
+                }`}
+              >
+                {confirmConfig.variant === "danger" ? (
+                  <Trash2 size={32} />
+                ) : (
+                  <LogOut size={32} />
+                )}
+              </div>
+
+              <h3 className="text-xl font-bold text-white mb-2">
+                {confirmConfig.title}
+              </h3>
+              <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                {confirmConfig.message}
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setIsConfirmOpen(false)}
+                  className="flex-1 px-6 py-3.5 rounded-xl font-semibold text-gray-300 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    confirmConfig.onConfirm();
+                    setIsConfirmOpen(false);
+                  }}
+                  className={`flex-1 px-6 py-3.5 rounded-xl font-semibold text-white transition-all active:scale-95 cursor-pointer shadow-lg ${
+                    confirmConfig.variant === "danger"
+                      ? "bg-red-500 hover:bg-red-600 shadow-red-500/20"
+                      : "bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20"
+                  }`}
+                >
+                  Confirm
                 </button>
               </div>
             </motion.div>
