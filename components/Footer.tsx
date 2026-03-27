@@ -145,7 +145,7 @@ const Footer = () => {
                   type="email"
                   placeholder="Enter your email"
                   required
-                  className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-full pl-11 pr-4 py-3.5 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-white placeholder-gray-500 transition-all"
+                  className="newsletter-input w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-full pl-11 pr-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                 />
               </div>
               <Button

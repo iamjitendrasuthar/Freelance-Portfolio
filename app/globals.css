@@ -42,3 +42,12 @@ select:-webkit-autofill:focus {
   /* Smooth transition for the background */
   transition: background-color 5000s ease-in-out 0s;
 }
+
+/* Only for newsletter email input */
+.newsletter-input:-webkit-autofill,
+.newsletter-input:-webkit-autofill:hover,
+.newsletter-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.05) inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
