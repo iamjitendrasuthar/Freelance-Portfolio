@@ -11,5 +11,5 @@ export default function WhatsAppWidget() {
         data-elfsight-app-lazy
       ></div>
     </div>
-  );
+  ); 
 }
