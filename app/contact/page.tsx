@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import FadeIn from "@/utils/Common";
-import { Mail, MapPin, Send, MessageSquare, Phone } from "lucide-react";
+import { Mail, MapPin, Send, MessageSquare } from "lucide-react";
 import { TwitterIcon, GithubIcon, LinkedinIcon } from "@/utils/Icons";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
@@ -12,8 +12,8 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // ✅ EmailJS Send Logic
-  const sendEmail = async (e: React.FormEvent) => {
+  // ✅ Updated Submit Logic: DB Save + EmailJS
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmitting) return;
 
@@ -21,6 +21,28 @@ const Contact = () => {
     const toastId = toast.loading("Sending your message...");
 
     try {
+      // 1. Get Form Data easily
+      const formData = new FormData(e.currentTarget);
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        subject: formData.get("subject"),
+        phone: formData.get("phone"),
+        message: formData.get("message"),
+      };
+
+      // 2. Save to MongoDB Database via API
+      const dbResponse = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!dbResponse.ok) {
+        throw new Error("Failed to save to database");
+      }
+
+      // 3. Send Email Notification via EmailJS
       await emailjs.sendForm(
         "service_yh5gznc", // Your Service ID
         "template_aa6vn4r", // Your Template ID
@@ -32,7 +54,7 @@ const Contact = () => {
       formRef.current?.reset();
     } catch (err) {
       toast.error("Failed to send. Please try again. 😢", { id: toastId });
-      console.error("EmailJS Error:", err);
+      console.error("Submission Error:", err);
     } finally {
       setIsSubmitting(false);
     }
@@ -50,11 +72,9 @@ const Contact = () => {
           HERO SECTION (DARK THEME) 
       ========================================= */}
       <section className="relative bg-[#051814] h-screen pt-28 pb-20 md:pt-40 md:pb-32">
-        {/* Background Glows (GPU Accelerated) */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-emerald-500/10 blur-[120px] rounded-full transform-gpu" />
           <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-teal-500/10 blur-[100px] rounded-full transform-gpu" />
-          {/* Subtle Grid */}
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
@@ -89,18 +109,17 @@ const Contact = () => {
       </section>
 
       {/* =========================================
-          CONTACT FORM (OVERLAPPING CENTER) 
+          CONTACT FORM
       ========================================= */}
       <section className="relative z-20 px-4 sm:px-6 -mt-85 md:-mt-45">
         <div className="max-w-4xl mx-auto">
           <FadeIn delay={0.2}>
             <div className="bg-white border border-gray-100 p-6 sm:p-10 md:p-12 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] relative overflow-hidden">
-              {/* Top Accent Line */}
               <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-400" />
 
               <form
                 ref={formRef}
-                onSubmit={sendEmail}
+                onSubmit={handleSubmit}
                 className="flex flex-col gap-6"
               >
                 <div className="grid sm:grid-cols-2 gap-6">
@@ -136,6 +155,7 @@ const Contact = () => {
                       Subject
                     </label>
                     <input
+                      name="subject"
                       type="text"
                       required
                       placeholder="Freelance Inquiry"
@@ -181,7 +201,7 @@ const Contact = () => {
                       size={18}
                       className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
                     />
-                  )}{" "}
+                  )}
                 </Button>
               </form>
             </div>
@@ -190,20 +210,18 @@ const Contact = () => {
       </section>
 
       {/* =========================================
-          INFO & MAP SECTION (LIGHT THEME) 
+          INFO & MAP SECTION
       ========================================= */}
       <section className="py-16 md:py-32 px-4 sm:px-6 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-            {/* 1. Map Integration (Top on Mobile - 65% on Desktop) */}
+            {/* Map Integration */}
             <FadeIn
               delay={0.2}
               className="w-full lg:col-span-8 order-1 lg:order-2"
             >
               <div className="group relative w-full h-[300px] sm:h-[400px] md:h-[480px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-xl transform-gpu transition-all duration-500 hover:shadow-2xl">
-                {/* Subtle Overlay for Premium Look */}
                 <div className="absolute inset-0 bg-emerald-900/5 pointer-events-none group-hover:bg-transparent transition-colors z-10" />
-
                 <iframe
                   title="Jalore Map"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57434.33128913346!2d72.61483329938565!3d25.383182855118744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3943cf630e2f585d%3A0xc6209a304e21b2d3!2sJalore%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1711450000000!5m2!1sen!2sin"
@@ -217,7 +235,7 @@ const Contact = () => {
               </div>
             </FadeIn>
 
-            {/* 2. Contact Info (Bottom on Mobile - 35% on Desktop) */}
+            {/* Contact Info */}
             <FadeIn
               delay={0.4}
               className="w-full lg:col-span-4 order-2 lg:order-1"
@@ -234,16 +252,13 @@ const Contact = () => {
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
-                  {/* Email Card */}
                   <a
                     href="mailto:hello@yourdomain.com"
                     className="flex flex-col sm:flex-row items-center sm:items-center gap-4 p-6 rounded-3xl bg-gray-50 border border-gray-100 transition-all active:scale-95 hover:bg-white hover:border-emerald-200 hover:shadow-md group text-center sm:text-left"
                   >
-                    {/* Icon Container: Centered using flex */}
                     <div className="w-14 h-14 rounded-2xl bg-white text-emerald-600 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
                       <Mail size={24} />
                     </div>
-
                     <div className="min-w-0">
                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
                         Email
@@ -254,13 +269,10 @@ const Contact = () => {
                     </div>
                   </a>
 
-                  {/* Location Card */}
                   <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 p-6 rounded-3xl bg-gray-50 border border-gray-100 transition-all hover:bg-white hover:border-emerald-200 hover:shadow-md group text-center sm:text-left">
-                    {/* Icon Container: Centered using flex */}
                     <div className="w-14 h-14 rounded-2xl bg-white text-emerald-600 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
                       <MapPin size={24} />
                     </div>
-
                     <div>
                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
                         Location
@@ -283,7 +295,6 @@ const Contact = () => {
                       aria-label={label}
                       className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-900 text-white transition-all active:scale-90 hover:bg-emerald-500 hover:-translate-y-1 shadow-lg group"
                     >
-                      {/* Icon centered inside the circle/square */}
                       <Icon
                         size={20}
                         className="transition-transform group-hover:scale-110"
