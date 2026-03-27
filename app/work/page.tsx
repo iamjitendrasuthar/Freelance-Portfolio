@@ -69,11 +69,14 @@ const Work = () => {
       {/* =========================================
           PROJECTS GRID (LIGHT THEME) 
       ========================================= */}
-      <ProjectsGrid />
+      <div className="-mt-40 md:pt-40">
+        <ProjectsGrid />
+      </div>
+
       {/* =========================================
           BOTTOM CTA SECTION
       ========================================= */}
-      <section className="-mt-10 md: mt-10 relative z-20">
+      <section className="-mt-10 md: -mt-35 relative z-20">
         <CTASection />
       </section>
     </main>

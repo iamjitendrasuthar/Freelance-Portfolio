@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const CTASection = () => {
   return (
-    <section className="py-20 md:py-32 bg-white relative">
+    <section className="py-20 md:py-32 relative bg-[#F9FAFB]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <FadeIn>
           {/* Card Container: overflow-hidden yahan se hata kar background wrapper mein shift kiya */}
