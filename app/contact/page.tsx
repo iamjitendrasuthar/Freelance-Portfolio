@@ -5,7 +5,7 @@ import FadeIn from "@/utils/Common";
 import { Mail, MapPin, Send, MessageSquare, Phone } from "lucide-react";
 import { TwitterIcon, GithubIcon, LinkedinIcon } from "@/utils/Icons";
 import emailjs from "@emailjs/browser";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import Button from "@/utils/Button";
 
 const Contact = () => {
@@ -46,8 +46,6 @@ const Contact = () => {
 
   return (
     <main className="w-full min-h-screen bg-white">
-      {/* ✅ Toaster for Notifications */}
-      <Toaster position="top-right" />
       {/* =========================================
           HERO SECTION (DARK THEME) 
       ========================================= */}

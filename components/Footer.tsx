@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Button from "@/utils/Button";
 import { Diamond, ArrowRight, Mail } from "lucide-react";
+import toast from "react-hot-toast";
 
 // Custom Brand Icons
 const TwitterIcon = ({ size = 20, className = "" }) => (
@@ -122,7 +123,18 @@ const Footer = () => {
               className="flex flex-col sm:flex-row gap-3 max-w-md"
               onSubmit={(e) => {
                 e.preventDefault();
-                alert("Subscribed successfully!"); // Added simple feedback
+
+                const email = e.target[0].value;
+                console.log(email);
+                if (!email) {
+                  toast.error("Please enter a valid email");
+                  return;
+                }
+
+                // success toast
+                toast.success("🎉 Subscribed successfully!");
+
+                e.target.reset(); // clear input
               }}
             >
               <div className="relative flex-grow">
