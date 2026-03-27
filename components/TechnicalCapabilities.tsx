@@ -133,12 +133,13 @@ const TechnicalCapabilities = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="mb-20 text-center lg:text-left flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-          <FadeIn className="max-w-2xl">
+        <div className="mb-20 text-center flex flex-col items-center gap-6">
+          <FadeIn className="max-w-2xl flex flex-col items-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold mb-6 tracking-widest uppercase">
               <Code2 size={16} />
               <span>Technical Capabilities</span>
             </div>
+
             <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
               Engineering solutions <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
@@ -146,7 +147,8 @@ const TechnicalCapabilities = () => {
               </span>
             </h2>
           </FadeIn>
-          <FadeIn delay={0.2} className="max-w-md lg:pb-2">
+
+          <FadeIn delay={0.2} className="max-w-md">
             <p className="text-gray-400 text-lg leading-relaxed">
               From low-level system performance to fluid user interfaces, I
               build robust ecosystems using the modern web stack.
