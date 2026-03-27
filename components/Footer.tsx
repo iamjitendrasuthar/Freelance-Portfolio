@@ -121,19 +121,21 @@ const Footer = () => {
             {/* Newsletter Input */}
             <form
               className="flex flex-col sm:flex-row gap-3 max-w-md"
-              onSubmit={(e) => {
+              onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
                 e.preventDefault();
 
-                const email = e.target[0].value;
+                const form = e.currentTarget;
+                const emailInput = form.elements[0] as HTMLInputElement;
+                const email = emailInput.value;
+
                 if (!email) {
                   toast.error("Please enter a valid email");
                   return;
                 }
 
-                // success toast
                 toast.success("🎉 Subscribed successfully!");
 
-                e.target.reset(); // clear input
+                form.reset();
               }}
             >
               <div className="relative flex-grow">
