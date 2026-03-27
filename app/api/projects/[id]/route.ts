@@ -1,7 +1,7 @@
 // app/api/projects/[id]/route.ts
 import { NextResponse } from "next/server";
 import connectDB from "@/utils/mongodb";
-import Project from "@/app/models/Project";
+import Project from "@/models/Project";
 
 // Yeh Next.js ko batayega ki is API ko cache NAHI karna hai
 export const dynamic = "force-dynamic";
