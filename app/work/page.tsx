@@ -69,7 +69,7 @@ const Work = () => {
       {/* =========================================
           PROJECTS GRID (LIGHT THEME) 
       ========================================= */}
-      <div className="-mt-40 md:pt-40">
+      <div className="-mt-40 md:pt-40 max-w-7xl mx-auto">
         <ProjectsGrid />
       </div>
 

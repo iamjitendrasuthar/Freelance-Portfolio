@@ -172,7 +172,7 @@ const Services = () => {
           SERVICES GRID (FIXED BACKGROUND BUG) 
       ========================================= */}
       <section className="relative z-20 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto px-0 md:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 -mt-24 md:-mt-32">
             {SERVICES.map((service, idx) => (
               /* FIX: White background is statically outside, hiding the hero line. FadeIn is only on content. */
@@ -220,7 +220,7 @@ const Services = () => {
           HOW I WORK (PROCESS SECTION)
       ========================================= */}
       <section className="mt-24 md:mt-32 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto px-0 md:px-6 lg:px-8">
           <FadeIn>
             <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs font-bold mb-6 tracking-widest uppercase w-max">
