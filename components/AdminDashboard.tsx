@@ -13,7 +13,9 @@ import {
   Calendar,
   Mail,
   Phone,
+  LogOut,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export interface ProjectType {
   _id: string;
@@ -28,6 +30,7 @@ export interface ProjectType {
 }
 
 const AdminDashboard = () => {
+  const router = useRouter();
   // Tabs State
   const [activeTab, setActiveTab] = useState<"projects" | "inquiries">(
     "projects",
@@ -187,44 +190,77 @@ const AdminDashboard = () => {
       setIsSaving(false);
     }
   };
-
+  const handleLogout = async () => {
+    if (confirm("Are you sure you want to logout?")) {
+      try {
+        const res = await fetch("/api/logout", { method: "POST" });
+        if (res.ok) {
+          router.push("/login"); // Login page par wapas bhej dein
+          router.refresh(); // Page refresh karein taaki middleware trigger ho
+        }
+      } catch (error) {
+        console.error("Logout failed", error);
+      }
+    }
+  };
   return (
     <div className="min-h-screen bg-[#051814] text-white pt-24 pb-12 sm:py-32 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-7xl mx-auto px-0 md:px-6 lg:px-8">
-        {/* Header & Tabs Section */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-10 gap-6 border-b border-white/10 pb-4">
-          <div className="w-full sm:w-auto">
-            <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 sm:gap-3 mb-6">
-              <FolderGit2 className="text-emerald-500 w-6 h-6 sm:w-8 sm:h-8" />
-              Admin Workspace
+        {/* --- UPDATED HEADER SECTION --- */}
+        <div className="flex flex-col gap-6 mb-8 sm:mb-10 border-b border-white/10 pb-6">
+          {/* Top Bar: Title & Logout */}
+          <div className="flex items-center justify-between w-full gap-4">
+            <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 sm:gap-3 truncate">
+              <FolderGit2 className="text-emerald-500 shrink-0 w-6 h-6 sm:w-8 sm:h-8" />
+              <span className="truncate">Admin Workspace</span>
             </h1>
 
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 text-gray-400 hover:text-red-400 transition-colors text-xs sm:text-sm font-medium px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-white/5 border border-white/10 cursor-pointer shrink-0"
+            >
+              <LogOut size={16} className="sm:w-[18px] sm:h-[18px]" />
+              <span>Logout</span>
+            </button>
+          </div>
+
+          {/* Bottom Bar: Tabs & Add Button */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             {/* TABS */}
-            <div className="flex gap-6">
+            <div className="flex gap-4 sm:gap-8 border-b sm:border-none border-white/5">
               <button
                 onClick={() => setActiveTab("projects")}
-                className={`flex items-center gap-2 pb-2 text-sm sm:text-base font-semibold transition-all ${activeTab === "projects" ? "text-emerald-400 border-b-2 border-emerald-400" : "text-gray-500 hover:text-gray-300"}`}
+                className={`flex items-center gap-2 pb-3 sm:pb-2 text-sm sm:text-base font-semibold transition-all cursor-pointer ${
+                  activeTab === "projects"
+                    ? "text-emerald-400 border-b-2 border-emerald-400"
+                    : "text-gray-500 hover:text-gray-300"
+                }`}
               >
                 <FolderGit2 size={18} /> Projects
               </button>
               <button
                 onClick={() => setActiveTab("inquiries")}
-                className={`flex items-center gap-2 pb-2 text-sm sm:text-base font-semibold transition-all ${activeTab === "inquiries" ? "text-emerald-400 border-b-2 border-emerald-400" : "text-gray-500 hover:text-gray-300"}`}
+                className={`flex items-center gap-2 pb-3 sm:pb-2 text-sm sm:text-base font-semibold transition-all cursor-pointer ${
+                  activeTab === "inquiries"
+                    ? "text-emerald-400 border-b-2 border-emerald-400"
+                    : "text-gray-500 hover:text-gray-300"
+                }`}
               >
-                <MessageSquare size={18} /> Client Inquiries
+                <MessageSquare size={18} />
+                <span className="whitespace-nowrap">Client Inquiries</span>
               </button>
             </div>
-          </div>
 
-          {/* Add Button (Only show on Projects Tab) */}
-          {activeTab === "projects" && (
-            <button
-              onClick={handleAddNew}
-              className="w-full sm:w-auto justify-center cursor-pointer flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-medium transition-colors shadow-lg shadow-emerald-500/20"
-            >
-              <Plus size={18} /> Add New Project
-            </button>
-          )}
+            {/* Add Button (Only show on Projects Tab) */}
+            {activeTab === "projects" && (
+              <button
+                onClick={handleAddNew}
+                className="w-full sm:w-auto justify-center cursor-pointer flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-medium transition-colors shadow-lg shadow-emerald-500/20 active:scale-95"
+              >
+                <Plus size={18} /> Add New Project
+              </button>
+            )}
+          </div>
         </div>
 
         {/* =========================================
