@@ -3,7 +3,6 @@ import connectDB from "@/utils/mongodb";
 import ClientInquiry from "@/models/ClientInquiry";
 
 export const dynamic = "force-dynamic";
-// GET: Fetch all inquiries
 export async function GET() {
   try {
     await connectDB();
