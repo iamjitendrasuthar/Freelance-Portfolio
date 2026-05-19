@@ -208,7 +208,7 @@ const Footer = () => {
 
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com/your-username"
+              href="https://github.com/iamjitendrasuthar"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-emerald-400 transition-colors"
@@ -217,7 +217,7 @@ const Footer = () => {
               <GithubIcon size={20} />
             </a>
             <a
-              href="https://linkedin.com/in/your-username"
+              href="https://www.linkedin.com/in/jitendra-suthar-5881b224a/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-emerald-400 transition-colors"
@@ -226,7 +226,7 @@ const Footer = () => {
               <LinkedinIcon size={20} />
             </a>
             <a
-              href="https://twitter.com/your-username"
+              href="https://x.com/imjitendra24"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-emerald-400 transition-colors"

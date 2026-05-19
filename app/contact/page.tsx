@@ -63,7 +63,7 @@ const Contact = () => {
   const SOCIAL_LINKS = [
     { icon: GithubIcon, href: "https://github.com/iamjitendrasuthar", label: "GitHub" },
     { icon: LinkedinIcon, href: "https://www.linkedin.com/in/jitendra-suthar-5881b224a/", label: "LinkedIn" },
-    { icon: TwitterIcon, href: "https://twitter.com", label: "Twitter" },
+    { icon: TwitterIcon, href: "https://x.com/imjitendra24", label: "Twitter" },
   ];
 
   return (
