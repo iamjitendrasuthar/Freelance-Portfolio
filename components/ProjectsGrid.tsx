@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Code2, Sparkles, Loader2 } from "lucide-react";
 import { GithubIcon } from "@/utils/Icons";
+import { usePathname } from "next/navigation";
 
 // 1. Define the TypeScript Interface based on your MongoDB Model
 export interface ProjectType {
@@ -22,22 +23,24 @@ const ProjectsGrid = () => {
   // 2. State for projects and loading status
   const [projects, setProjects] = useState<ProjectType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  // 3. Fetch data from the API
+  const pathname = usePathname();
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await fetch("/api/projects");
+
         if (response.ok) {
           const data = await response.json();
 
-          // 🔥 NAYA CODE: Sirf un projects ko filter karo jinka featured 'true' hai
-          const featuredProjects = data.filter(
-            (project: ProjectType) => project.featured === true,
-          );
+          if (pathname.startsWith("/work")) {
+            setProjects(data);
+          } else {
+            const featuredProjects = data.filter(
+              (project: ProjectType) => project.featured === true,
+            );
 
-          // Filtered data ko state mein set karo
-          setProjects(featuredProjects);
+            setProjects(featuredProjects);
+          }
         } else {
           console.error("Failed to fetch projects");
         }
@@ -49,7 +52,7 @@ const ProjectsGrid = () => {
     };
 
     fetchProjects();
-  }, []);
+  }, [pathname]);
 
   return (
     <section className="relative z-20 px-4 sm:px-6 -translate-y-32 md:-translate-y-40">
@@ -98,7 +101,7 @@ const ProjectsGrid = () => {
                 transition={{
                   duration: 0.5,
                   delay: idx * 0.1,
-                  ease: "easeOut", 
+                  ease: "easeOut",
                 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="bg-white rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-colors duration-500 overflow-hidden flex flex-col h-full group transform-gpu"
