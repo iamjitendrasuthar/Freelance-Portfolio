@@ -61,8 +61,16 @@ const Contact = () => {
   };
 
   const SOCIAL_LINKS = [
-    { icon: GithubIcon, href: "https://github.com/iamjitendrasuthar", label: "GitHub" },
-    { icon: LinkedinIcon, href: "https://www.linkedin.com/in/jitendra-suthar-5881b224a/", label: "LinkedIn" },
+    {
+      icon: GithubIcon,
+      href: "https://github.com/iamjitendrasuthar",
+      label: "GitHub",
+    },
+    {
+      icon: LinkedinIcon,
+      href: "https://www.linkedin.com/in/jitendra-suthar-5881b224a/",
+      label: "LinkedIn",
+    },
     { icon: TwitterIcon, href: "https://x.com/imjitendra24", label: "Twitter" },
   ];
 
@@ -224,7 +232,7 @@ const Contact = () => {
                 <div className="absolute inset-0 bg-emerald-900/5 pointer-events-none group-hover:bg-transparent transition-colors z-10" />
                 <iframe
                   title="Jalore Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57434.33128913346!2d72.61483329938565!3d25.383182855118744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3943cf630e2f585d%3A0xc6209a304e21b2d3!2sJalore%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1711450000000!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.74842920963!2d72.41492881144384!3d23.020474101422124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1779188814780!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
