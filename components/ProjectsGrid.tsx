@@ -98,7 +98,7 @@ const ProjectsGrid = () => {
                 transition={{
                   duration: 0.5,
                   delay: idx * 0.1,
-                  ease: "easeOut",
+                  ease: "easeOut", 
                 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="bg-white rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-colors duration-500 overflow-hidden flex flex-col h-full group transform-gpu"
