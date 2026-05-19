@@ -108,13 +108,13 @@ const ExpertiseCard = ({ item, index }: { item: any; index: number }) => {
             ))}
           </div>
 
-          <button className="flex items-center gap-2 text-sm font-bold text-white group/btn">
+          {/* <button className="flex items-center gap-2 text-sm font-bold text-white group/btn">
             Explore Documentation
             <ArrowUpRight
               size={16}
               className="text-emerald-500 transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
             />
-          </button>
+          </button> */}
         </div>
       </div>
     </FadeIn>
