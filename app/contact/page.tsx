@@ -264,7 +264,7 @@ const Contact = () => {
                         Email
                       </p>
                       <p className="text-base sm:text-lg font-bold text-gray-900 truncate">
-                        hello@yourdomain.com
+                        iamjitendrasuthar24@gmail.com
                       </p>
                     </div>
                   </a>
@@ -278,7 +278,7 @@ const Contact = () => {
                         Location
                       </p>
                       <p className="text-base sm:text-lg font-bold text-gray-900">
-                        Jalore, Rajasthan
+                        Ahmedabad, Gujarat
                       </p>
                     </div>
                   </div>
